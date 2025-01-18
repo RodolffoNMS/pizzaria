@@ -7,7 +7,8 @@ import com.zup.pizzaria.repository.ClienteRepository;
 import com.zup.pizzaria.repository.PedidoRepository;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service //indica ao spring que essa é uma classe de service
+
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
@@ -17,14 +18,16 @@ public class PedidoService {
         this.clienteRepository = clienteRepository;
     }
 
+
     public PedidoDTO criarPedido(Pedido pedido) {
-        // Salva pedido
-        pedidoRepository.save(pedido);
 
         // Obtenho cliente
         Cliente cliente = clienteRepository
                 .findById(pedido.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        // Salva pedido
+        pedidoRepository.save(pedido);
 
         return new PedidoDTO(cliente.getNome(), cliente.getEmail(), pedido.getDescricao());
     }
