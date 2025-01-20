@@ -13,22 +13,21 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
 
+    // Construtor para injeção de dependências
     public PedidoService(PedidoRepository pedidoRepository, ClienteRepository clienteRepository) {
         this.pedidoRepository = pedidoRepository;
         this.clienteRepository = clienteRepository;
     }
 
-
+    // Método para criar um pedido
     public PedidoDTO criarPedido(Pedido pedido) {
-
-        // Obtenho cliente
+        // Busca o cliente pelo ID associado ao pedido
         Cliente cliente = clienteRepository
                 .findById(pedido.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-
-        // Salva pedido
+        // Salva o pedido no banco de dados
         pedidoRepository.save(pedido);
-
+        // Retorna um DTO com as informações do cliente e do pedido
         return new PedidoDTO(cliente.getNome(), cliente.getEmail(), pedido.getDescricao());
     }
 }
