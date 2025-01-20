@@ -1,15 +1,21 @@
 package com.zup.pizzaria.dtos;
-/*
-* O que esse código faz?
-* Recebe os dados do cliente
-* O cliente vai enviar um JSON com os campos nome, email e telefone.ackage com.zup.pizzaria.dtos;
-* O DTO vai capturar esses dados.
-*/
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class ClienteDTO {
+    @NotBlank(message = "Por favor, insira um nome.")
     private String nome;
+
+    @NotBlank(message = "Por favor, insira um e-mail.")
+    @Email(message = "Por favor, insira um e-mail válido")
     private String email;
+
+    @NotBlank(message = "Por favor, insira um numero de telefone.")
+    @Pattern(regexp = "\\d+", message = "O telefone deve conter apenas números.")
+    @Size(min = 8, message = "O telefone deve ter ao menos 8 dígitos.")
     private String telefone;
 
     public ClienteDTO(String nome, String email, String telefone){
