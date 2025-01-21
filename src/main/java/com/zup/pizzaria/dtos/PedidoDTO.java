@@ -1,8 +1,18 @@
 package com.zup.pizzaria.dtos;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class PedidoDTO {
+
+    @NotBlank(message = "Por favor, insira um nome.")
     private String nomeCliente;
+
+    @NotBlank(message = "Por favor, insira um e-mail.")
+    @Email(message = "Por favor, insira um e-mail válido")
     private String emailCliente;
+
+    @NotBlank(message = "Por favor, insira os dados do pedido")
     private String descricaoPedido;
 
     public PedidoDTO(String nomeCliente, String emailCliente, String descricaoPedido) {
