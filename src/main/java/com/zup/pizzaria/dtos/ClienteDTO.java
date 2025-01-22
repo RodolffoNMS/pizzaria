@@ -14,7 +14,7 @@ public class ClienteDTO {
     private String email;
 
     @NotBlank(message = "Por favor, insira um numero de telefone.")
-    @Pattern(regexp = "\\d+", message = "O telefone deve conter apenas números.")
+    @Pattern(regexp = "\\d{2}\\d{8,9}", message = "O telefone deve conter o código de área e entre 8 a 9 dígitos.")
     @Size(min = 8, message = "O telefone deve ter ao menos 8 dígitos.")
     private String telefone;
 

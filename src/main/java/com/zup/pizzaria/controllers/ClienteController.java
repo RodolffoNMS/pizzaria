@@ -29,56 +29,6 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
     }
 
-    /*
-     * 1. @ExceptionHandler(DataIntegrityViolationException.class)
-     * O que faz:
-     * Esta anotação indica que o metodo abaixo será responsável por tratar exceções do tipo
-     * DataIntegrityViolationException.
-     * Sempre que essa exceção for lançada em qualquer parte do código dentro do mesmo Controller,
-     * este metodo será chamado automaticamente.
-
-     * Por que usar:
-     * Isso permite centralizar o tratamento de erros específicos, como violações de integridade de dados
-     * (por exemplo, tentativa de inserir um valor duplicado em uma coluna com restrição unique no banco de dados).
-
-     * 2. public ResponseEntity<...{
-     * O que faz:
-     * Define o metodo que será executado quando a exceção DataIntegrityViolationException for capturada.
-     * O metodo retorna um objeto do tipo ResponseEntity<Map<String, String>>, que é uma resposta HTTP
-     * contendo um corpo no formato de um mapa (Map) com chave e valor do tipo String.
-
-     * Parâmetro ex:
-     * O parâmetro ex contém a exceção capturada, permitindo que você acesse informações sobre o erro ocorrido
-     * (como a mensagem ou a causa).
-
-     * 3. Map<String, String> error = new HashMap<>();
-     * O que faz:
-     * Cria um novo mapa (HashMap) para armazenar as informações de erro que serão enviadas na resposta HTTP.
-     * O mapa é usado para estruturar a mensagem de erro no formato chave-valor, onde a chave é "error" e o valor
-     * é a mensagem de erro.
-
-     * 4. error.put("error", "O e-mail informado já está em uso. Por favor, insira um e-mail diferente.");
-     * O que faz:
-     * Adiciona uma entrada ao mapa error com a chave "error" e o
-     * valor "O e-mail informado já está em uso. Por favor, insira um e-mail diferente.".
-     * Essa mensagem será enviada ao cliente como parte da resposta HTTP, informando o motivo do erro.
-
-     * 5. return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-     * O que faz:
-     * Cria e retorna uma resposta HTTP com:
-     * Status HTTP: HttpStatus.BAD_REQUEST (código 400), que indica que houve um erro na solicitação do cliente.
-
-     * Corpo da resposta: O mapa error, que contém a mensagem de erro.
-     * Por que usar:
-     * O ResponseEntity é uma classe do Spring que permite personalizar completamente a resposta HTTP,
-     * incluindo o status, cabeçalhos e corpo.
-     * Aqui, o status BAD_REQUEST é usado porque o cliente enviou dados inválidos (um e-mail duplicado, no caso).
-
-     * Resumo do Fluxo:
-     * Quando uma exceção DataIntegrityViolationException ocorre, o Spring chama automaticamente este metodo.
-     *O metodo cria um mapa contendo uma mensagem de erro amigável.
-     *O metodo retorna uma resposta HTTP com o status 400 (BAD_REQUEST) e o corpo contendo a mensagem de erro.
-     */
     @ExceptionHandler(DataIntegrityViolationException.class)
     public  ResponseEntity<Map<String, String>> erroEmailDuplicado(DataIntegrityViolationException ex){
         Map<String, String> erro = new HashMap<>();
