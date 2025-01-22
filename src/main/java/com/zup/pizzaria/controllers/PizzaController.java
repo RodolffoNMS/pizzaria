@@ -22,19 +22,19 @@ public class PizzaController {
 
     @PostMapping
     public ResponseEntity<Pizza> criarPizza(@Valid @RequestBody PizzaDTO pizzaDTO) {
-        Pizza pizza = pizzaService.criarPizza(pizzaDTO);
+        Pizza pizza = pizzaService.createPizza(pizzaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pizza);
     }
 
     @GetMapping
     public ResponseEntity<List<Pizza>> getTodasPizzas() {
-        List<Pizza> pizzas = pizzaService.getTodasPizzas();
+        List<Pizza> pizzas = pizzaService.getAllPizzas();
         return ResponseEntity.ok(pizzas);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pizza> getPizzaPorId(@PathVariable Long id) {
-        return pizzaService.getPizzaPorId(id)
+        return pizzaService.getById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
@@ -47,7 +47,7 @@ public class PizzaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletaPizza(@PathVariable Long id) {
-        pizzaService.deletaPizza(id);
+        pizzaService.deletePizza(id);
         return ResponseEntity.noContent().build();
     }
 }

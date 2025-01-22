@@ -16,18 +16,18 @@ public class PizzaService {
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    public Pizza criarPizza(PizzaDTO pizzaDTO) {
+    public Pizza createPizza(PizzaDTO pizzaDTO) {
         Pizza pizza = new Pizza();
         pizza.setNome(pizzaDTO.getNome());
         pizza.setDescricao(pizzaDTO.getDescricao());
         pizza.setPreco(pizzaDTO.getPreco());
         return pizzaRepository.save(pizza);
     }
-    public List<Pizza> getTodasPizzas() {
+    public List<Pizza> getAllPizzas() {
         return pizzaRepository.findAll();
     }
 
-    public Optional<Pizza> getPizzaPorId(Long id) {
+    public Optional<Pizza> getById(Long id) {
         return pizzaRepository.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class PizzaService {
         return pizzaRepository.save(pizza);
     }
 
-    public void deletaPizza(Long id) {
+    public void deletePizza(Long id) {
         pizzaRepository.deleteById(id);
     }
 }
