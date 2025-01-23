@@ -13,11 +13,6 @@ public class Pedido {
     private String descricao;
     private Long clienteId;
 
-    public Pedido(Long clienteId, String descricao) {
-        this.clienteId = clienteId;
-        this.descricao = descricao;
-    }
-
     public Long getId() {
         return id;
     }

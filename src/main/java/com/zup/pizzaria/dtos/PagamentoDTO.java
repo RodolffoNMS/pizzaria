@@ -1,23 +1,36 @@
-package com.zup.pizzaria.models;
+package com.zup.pizzaria.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity
-public class Pagamento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PagamentoDTO {
+
     private Long id;
+
+    @NotNull(message = "O ID do pedido é obrigatório.")
     private Long pedidoId;
+
+    @NotBlank(message = "A forma de pagamento é obrigatória.")
     private String formaPagamento;
+
+    @NotNull(message = "O valor pago é obrigatório.")
     private double valorPago;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalDateTime dataHoraPagamento;
 
+    public PagamentoDTO() {
+    }
+
+    public PagamentoDTO(Long id, Long pedidoId, String formaPagamento, double valorPago, LocalDateTime dataHoraPagamento) {
+        this.id = id;
+        this.pedidoId = pedidoId;
+        this.formaPagamento = formaPagamento;
+        this.valorPago = valorPago;
+        this.dataHoraPagamento = dataHoraPagamento;
+    }
 
     public Long getId() {
         return id;
@@ -39,8 +52,8 @@ public class Pagamento {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(String fomrmaPagamento) {
-        this.formaPagamento = fomrmaPagamento;
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public double getValorPago() {
